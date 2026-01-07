@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El apellido valiente de Aura</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+  background: linear-gradient(#fdeff9, #ecf0ff);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.scene {
+  display: none;
+  height: 100vh;
+  padding: 30px;
+  text-align: center;
+  animation: fadeIn 1.2s ease;
+}
+
+.scene.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1, h2, p {
+  color: #4a4a4a;
+}
+
+.big {
+  font-size: 2em;
+}
+
+.small {
+  font-size: 1.2em;
+}
+
+.stars::before {
+  content: "✨ ✨ ✨";
+  display: block;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+button {
+  margin-top: 30px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 30px;
+  background: #ffb6c1;
+  color: #fff;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="narracion" src="audio.mp3"></audio>
+
+<div class="scene active stars">
+  <h1>El apellido valiente de Aura</h1>
+  <p class="small">Un cuento para ti 💛</p>
+  <button onclick="playStory()">Escuchar cuento</button>
+</div>
+
+<div class="scene"><p class="big">Había una vez una niña muy especial que se llamaba Aura.</p></div>
+<div class="scene"><p class="big">Aura tenía una sonrisa bonita y un corazón lleno de luz.</p></div>
+<div class="scene"><p class="big">Aura también tenía un apellido. Su apellido era Cerda.</p></div>
+<div class="scene"><p class="big">Un apellido que venía de su familia y de Guadalajara.</p></div>
+<div class="scene"><p class="big">A veces, algunas personas no saben hablar bonito.</p></div>
+<div class="scene"><p class="big">Pero Aura aprendió que su nombre era un regalo.</p></div>
+<div class="scene"><p class="big">“Este es mi nombre y me gusta”.</p></div>
+<div class="scene"><p class="big">“Sí, me llamo Cerda. Es el apellido de mi familia”.</p></div>
+<div class="scene"><p class="big">Aura caminaba segura, porque no estaba sola.</p></div>
+<div class="scene"><p class="big">Soy querida. Soy valiente. Mi apellido me gusta.</p></div>
+<div class="scene stars"><h2>Te amo, Aura 💛<br>Papá siempre está contigo</h2></div>
+
+<script>
+// Protección básica
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if (e.key === 'F12' || (e.ctrlKey && ['u','s','i','j'].includes(e.key.toLowerCase()))) {
+    e.preventDefault();
+  }
+});
+
+const scenes = document.querySelectorAll('.scene');
+let index = 0;
+
+function playStory() {
+  document.getElementById('narracion').play();
+  scenes[0].classList.remove('active');
+  index = 1;
+  showScene();
+}
+
+function showScene() {
+  if (index >= scenes.length) return;
+  scenes[index].classList.add('active');
+  setTimeout(() => {
+    scenes[index].classList.remove('active');
+    index++;
+    showScene();
+  }, 7000);
+}
+</script>
+
+</body>
+</html>
